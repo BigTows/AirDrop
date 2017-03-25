@@ -3,3 +3,5 @@ version: ${project.version}
 main: ru.airdrop.Airdrop
 authors: [BigTows]
 description: This plugin for minecraft 1.11.
+commands:
+ spawn:
