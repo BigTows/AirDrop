@@ -26,7 +26,7 @@ public final class Airdrop extends JavaPlugin implements Listener{
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         if (cmd.getName().equalsIgnoreCase("spawn")){
-            Generate.spawnDrop(new Location(getServer().getWorld("world"),255,160,255),this);
+            Generate.spawnDragon(new Location(getServer().getWorld("world"),-1333,160,1),this);
         }
         return true;
     }
