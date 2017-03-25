@@ -24,48 +24,43 @@ public class Generate extends JavaPlugin {
 
     /**
      * TODO add status AirDrop
-     * @param location
+     *
      * @param airdrop
      */
-    public static void spawnDragon(Location location,Airdrop airdrop) {
-        Location locDragon = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ() + 100);
+    public static boolean spawnDragon(Location dropLocation, Airdrop airdrop) {
+        if (idTaskDragon != 0) return false;
+        Location locDragon = new Location(dropLocation.getWorld(), dropLocation.getX(), dropLocation.getY(), dropLocation.getZ() + 100);
         Entity dragon = locDragon.getWorld().spawnEntity(locDragon, EntityType.ENDER_DRAGON);
-        Server server = Bukkit.getServer();
-        idTaskDragon = server.getScheduler().scheduleSyncRepeatingTask(airdrop,
+        idTaskDragon = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(airdrop,
                 new Runnable() {
                     @Override
                     public void run() {
-                        Location loc = new Location(dragon.getLocation().getWorld(), dragon.getLocation().getX(), dragon.getLocation().getY(), dragon.getLocation().getZ() - 2);
-                        dragon.teleport(loc);
-                        if (dragon.getLocation().getZ() >= location.getZ() && dragon.getLocation().getZ() <=location.getZ()+1) {
-                            Location chest = loc;
-                            chest.setZ(chest.getZ() - 4);
-                            chest.getBlock().setType(Material.CHEST);
-                            dropChest(chest,airdrop);
-                            Bukkit.broadcastMessage(chest.toString());
-                        } else if (dragon.getLocation().getZ() <= location.getZ()-100) {
+                        locDragon.setZ(locDragon.getZ() - 2);
+                        dragon.teleport(locDragon);
+                        if (dragon.getLocation().getZ() >= dropLocation.getZ() && dragon.getLocation().getZ() <= dropLocation.getZ() + 1) {
+                            dropChest(new Location(locDragon.getWorld(), locDragon.getX(), locDragon.getY(), locDragon.getZ() - 4), airdrop);
+                        } else if (dragon.getLocation().getZ() <= dropLocation.getZ() - 100) {
                             dragon.remove();
-                            Bukkit.broadcastMessage(dragon.getLocation().getZ()+" : "+location.getZ());
                             Bukkit.getScheduler().cancelTask(idTaskDragon);
                         }
                     }
                 }, 1, 1L);
-
+        return true;
     }
 
-    public static void dropChest(Location locChest, Airdrop airdrop){
-        Server server = Bukkit.getServer();
-        idTaskChest = server.getScheduler().scheduleSyncRepeatingTask(airdrop,
+    public static void dropChest(Location locChest, Airdrop airdrop) {
+        idTaskChest = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(airdrop,
                 new Runnable() {
                     @Override
                     public void run() {
                         locChest.getBlock().setType(Material.AIR);
-                        Location underChest = new Location(locChest.getWorld(),locChest.getX(),locChest.getY()-1,locChest.getZ());
-                        if (underChest.getBlock().getType()!=Material.AIR){
+                        locChest.setY(locChest.getY() - 1);
+                        if (locChest.getBlock().getType() != Material.AIR) {
+                            locChest.setY(locChest.getY() + 1);
                             locChest.getBlock().setType(Material.CHEST);
+                            idTaskDragon = 0;
                             Bukkit.getScheduler().cancelTask(idTaskChest);
-                        }else {
-                            locChest.setY(locChest.getY() - 1);
+                        } else {
                             locChest.getBlock().setType(Material.CHEST);
                         }
 
