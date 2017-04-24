@@ -22,11 +22,6 @@ public class Generate extends JavaPlugin {
     public static int idTaskDragon = 0;
     public static int idTaskChest = 0;
 
-    /**
-     * TODO add status AirDrop
-     *
-     * @param airdrop
-     */
     public static boolean spawnDragon(Location dropLocation, Airdrop airdrop) {
         if (idTaskDragon != 0) return false;
         Location locDragon = new Location(dropLocation.getWorld(), dropLocation.getX(), dropLocation.getY(), dropLocation.getZ() + 100);

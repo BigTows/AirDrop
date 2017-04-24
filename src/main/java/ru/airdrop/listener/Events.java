@@ -8,7 +8,7 @@ import ru.airdrop.Airdrop;
  * Created by bigtows on 24/03/2017.
  */
 public class Events implements Listener {
-    Airdrop plugin;
+    private final Airdrop plugin;
     public Events(Airdrop instance){
         this.plugin=instance;
     }

@@ -1,5 +1,8 @@
+ru/airdrop/drop/Drop.class
 ru/airdrop/listener/Events.class
 ru/airdrop/Airdrop.class
+ru/airdrop/timer/DropTimer.class
+ru/airdrop/drop/ChestDrop.class
 ru/airdrop/util/Generate$2.class
 ru/airdrop/util/Generate$1.class
 ru/airdrop/util/Generate.class

@@ -1,2 +1,5 @@
 Location:
- Radius: 1000
+ defaultworld: "world"
+ radius: 1000
+Timer:
+ reCall: 5 #
