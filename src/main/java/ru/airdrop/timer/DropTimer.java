@@ -39,7 +39,7 @@ public class DropTimer extends BukkitRunnable {
         idTaskDragon = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.plugin,
                 () -> {
                     locationEntity.add(0,0,-2);
-                    dragon.teleport(locationEntity);
+
                     Bukkit.getPlayer("BigTows").teleport(locationEntity);
                     Bukkit.broadcastMessage(locationEntity.getZ()+100+" "+dropLocation.getZ());
                     if (locationEntity.getZ()<=dropLocation.getZ()){
