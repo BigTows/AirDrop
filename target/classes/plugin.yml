@@ -1,0 +1,7 @@
+name: Airdrop
+version: 1.0-SNAPSHOT
+main: ru.airdrop.Airdrop
+authors: [BigTows]
+description: This plugin for minecraft 1.11.
+commands:
+ spawn:
